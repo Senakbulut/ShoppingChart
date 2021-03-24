@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "../ProductCard";
 import { Container, Row } from "react-bootstrap";
 
-const ProductsGrid = ({ products, onIncrement, onDecrement, cart }) => {
+const ProductsGrid = (props) => {
+  const [products, onIncrement, onDecrement, cart] = useState([]);
+
   return (
     <Container>
       <Row sm="2" md="3">
-        {products.map((product) => (
+        {props.products.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
-            cartItem={cart[product.id]}
-            onIncrement={onIncrement}
-            onDecrement={onDecrement}
+            cartItem={props.cart[product.id]}
+            onIncrement={props.onIncrement}
+            onDecrement={props.onDecrement}
           />
         ))}
       </Row>

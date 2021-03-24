@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { CartIcon } from "../icons";
 
-const NavBar = ({ totalItems }) => {
+const NavBar = (props) => {
+  const [totalItems] = useState([]);
   return (
     <div>
       <Navbar bg="dark" variant="dark" expand="md">
@@ -20,7 +21,7 @@ const NavBar = ({ totalItems }) => {
           <Nav.Item>
             <Nav.Link href="#">
               <CartIcon />
-              Cart ({totalItems})
+              Cart ({props.totalItems})
             </Nav.Link>
           </Nav.Item>
         </Navbar>

@@ -1,32 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProductCard.css";
 import { Card, Button, Row, Col, Badge } from "react-bootstrap";
 import { MinusCircleIcon, PlusCircleIcon, CartIcon } from "../icons";
 
-const ProductCard = ({ product, onIncrement, onDecrement, cartItem }) => {
+const ProductCard = (props) => {
+  const [product, onIncrement, onDecrement, cartItem] = useState([]);
+
   return (
     <Col style={{ margin: "30px 0px" }}>
       <Card className="">
         <Card.Img
           top
           className="image"
-          src={product.image}
-          alt={product.title}
+          src={props.product.image}
+          alt={props.product.title}
         />
         <Card.Body className="d-flex flex-column">
-          <Card.Title tag="h5">{product.title}</Card.Title>
+          <Card.Title tag="h5">{props.product.title}</Card.Title>
           <Card.Subtitle tag="h6" className="mb-2 text-muted">
-            {product.subtitle}
+            {props.product.subtitle}
           </Card.Subtitle>
-          <Card.Text className="text">{product.description}</Card.Text>
+          <Card.Text className="text">{props.product.description}</Card.Text>
           <Row>
-            {cartItem.value > 0 ? (
+            {props.cartItem.value > 0 ? (
               <>
                 <Col>
                   <Button
                     variant="danger"
                     size="lg"
-                    onClick={() => onDecrement(cartItem)}
+                    onClick={() => props.onDecrement(props.cartItem)}
                     style={{ "margin-top": "auto" }}
                   >
                     <MinusCircleIcon />
@@ -37,14 +39,14 @@ const ProductCard = ({ product, onIncrement, onDecrement, cartItem }) => {
                     variant="secondary"
                     style={{ fontSize: 30, width: "100%" }}
                   >
-                    {cartItem.value}
+                    {props.cartItem.value}
                   </Badge>
                 </Col>
                 <Col>
                   <Button
                     variant="primary"
                     size="lg"
-                    onClick={() => onIncrement(cartItem)}
+                    onClick={() => props.onIncrement(props.cartItem)}
                     style={{ "margin-top": "auto" }}
                   >
                     <PlusCircleIcon />
@@ -55,7 +57,7 @@ const ProductCard = ({ product, onIncrement, onDecrement, cartItem }) => {
               <Col>
                 <Button
                   variant="primary"
-                  onClick={() => onIncrement(cartItem)}
+                  onClick={() => props.onIncrement(props.cartItem)}
                   style={{ "margin-top": "auto" }}
                 >
                   Add to Cart
